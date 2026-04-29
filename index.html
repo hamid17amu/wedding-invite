@@ -233,6 +233,7 @@
     .venue-col { flex: 1; display: flex; flex-direction: column; align-items: center; text-align: center; }
     .dashed-line { width: 100%; border-top: 1.5px dashed rgba(59, 28, 26, 0.4); margin: 4% 0; }
     .map-frame { width: 100%; aspect-ratio: 1.4; border: 1px solid rgba(184, 115, 51, 0.1); border-radius: 4px; margin-top: 2%; box-shadow: 0 4px 10px rgba(0,0,0,0.05); pointer-events: auto; }
+    .page-footer { position: fixed; bottom: 3vh; left: 0; width: 100%; text-align: center; font-family: 'Montserrat', sans-serif; font-size: clamp(9px, 1.2vw, 11px); letter-spacing: 2px; color: rgba(0, 0, 0, 0.6); z-index: 50; pointer-events: none; text-transform: uppercase; }
 
      #openBtn { position: absolute; bottom: 8vh; left: 50%; transform: translateX(-50%); padding: 12px 40px; border-radius: 40px; border: 1px solid #f5d6a0; background: rgba(245, 214, 160, 0.1); color: #f5d6a0; font-size: clamp(14px, 2.5vw, 18px); letter-spacing: 4px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; backdrop-filter: blur(5px); pointer-events: auto; z-index: 100; }
     #openBtn:hover { background: #f5d6a0; color: #2e1010; box-shadow: 0 0 20px rgba(245, 214, 160, 0.4); }
@@ -328,6 +329,7 @@
     </div>
     
     <button onclick="openEnv()" id="openBtn">Open Invitation</button>
+    <div class="page-footer">&copy; 2026 Hamid & Aisha. All rights reserved.</div>
 </div>
 
 <script>
