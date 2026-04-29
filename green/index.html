@@ -6,7 +6,6 @@
 <link rel="icon" type="image/png" href="../wax-seal.png">
 <title>Hamid Weds Aisha</title>
 <style>
-    /* Added "Great Vibes" to the Google Fonts import for the fancy names */
     @import url('https://fonts.googleapis.com/css2?family=Alex+Brush&family=Great+Vibes&family=Montserrat:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 
     body {
@@ -19,7 +18,6 @@
         -moz-osx-font-smoothing: grayscale;
     }
 
-    /* PERFORMANCE OPTIMIZATION: Moving background animation to a separate layer using hardware-accelerated transforms */
     .bg-animation-layer {
         position: fixed;
         top: -50%; left: -50%; width: 200%; height: 200%;
@@ -32,7 +30,6 @@
         will-change: transform;
     }
 
-    /* Optimized floating sparkles using simplified layers */
     .sparkles-container {
         position: fixed;
         top: 0; left: 0; width: 100%; height: 100%;
@@ -44,21 +41,22 @@
     .sparkles-container::before, .sparkles-container::after {
         content: '';
         position: absolute;
-        top: -20%; left: -10%; width: 120%; height: 140%;
+        top: -50%; left: -10%; width: 120%; height: 200%;
         background-image: 
-            radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.4) 1px, transparent 2px),
-            radial-gradient(circle at 70% 60%, rgba(212, 175, 55, 0.3) 2px, transparent 3px),
-            radial-gradient(circle at 40% 80%, rgba(184, 134, 11, 0.3) 1.5px, transparent 2.5px);
-        background-size: 150px 150px;
-        animation: floatSparklesOptimized 40s linear infinite;
+            radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.6) 2px, transparent 4px),
+            radial-gradient(circle at 70% 60%, rgba(212, 175, 55, 0.5) 3px, transparent 6px),
+            radial-gradient(circle at 40% 80%, rgba(184, 134, 11, 0.6) 2.5px, transparent 5px),
+            radial-gradient(circle at 90% 10%, rgba(212, 175, 55, 0.4) 1.5px, transparent 3px);
+        background-size: 200px 200px;
+        animation: floatSparklesOptimized 30s linear infinite;
         will-change: transform;
     }
 
     .sparkles-container::after {
-        background-size: 250px 250px;
-        animation-duration: 60s;
+        background-size: 350px 350px;
+        animation-duration: 45s;
         animation-direction: reverse;
-        opacity: 0.5;
+        opacity: 0.6;
     }
 
     @keyframes gradientShiftLayer {
@@ -69,7 +67,7 @@
 
     @keyframes floatSparklesOptimized {
         0% { transform: translate3d(0, 0, 0); }
-        100% { transform: translate3d(0, -150px, 0); }
+        100% { transform: translate3d(0, -400px, 0); }
     }
 
     .fixed-viewport {
@@ -116,34 +114,31 @@
     .scene.pulling .envelope {
         transform: rotateX(8deg) translateY(65%); 
     }
-    .scene.pulling::after {
-        transform: translateY(65%) scale(1.2);
-        opacity: 0.1;
-    }
 
     .back {
         position: absolute;
         width: 100%; height: 100%;
         background: linear-gradient(135deg, #1b4d3e, #0d2b22);
         border-radius: 10px;
+        /* PHYSICAL FIX: Pushed back slightly deeper to give the flap room to rest */
         transform: translateZ(-5px);
-        box-shadow: inset 0 0 50px rgba(0,0,0,0.5);
+        box-shadow: inset 0 0 50px rgba(0,0,0,0.6);
     }
 
     .flaps { position: absolute; width: 100%; height: 100%; transform-style: preserve-3d; z-index: 3; }
     .left, .right, .bottom { position: absolute; width: 100%; height: 100%; top: 0; left: 0; }
     
-    .left { background: linear-gradient(to right, #2d6a58, #1b4d3e); clip-path: polygon(0 0, 52% 52%, 0 100%); transform: translateZ(15px); }
-    .right { background: linear-gradient(to left, #2d6a58, #1b4d3e); clip-path: polygon(100% 0, 48% 52%, 100% 100%); transform: translateZ(16px); }
-    .bottom { background: linear-gradient(to top, #143b2f, #2d6a58); clip-path: polygon(0 100%, 50% 50%, 100% 100%); transform: translateZ(17px); }
+    .left { background: linear-gradient(to right, #2d6a58, #1b4d3e); clip-path: polygon(0 0, 52% 52%, 0 100%); transform: translateZ(10px); }
+    .right { background: linear-gradient(to left, #2d6a58, #1b4d3e); clip-path: polygon(100% 0, 48% 52%, 100% 100%); transform: translateZ(11px); }
+    .bottom { background: linear-gradient(to top, #143b2f, #2d6a58); clip-path: polygon(0 100%, 50% 50%, 100% 100%); transform: translateZ(12px); }
 
     .flap-wrapper {
         position: absolute;
         width: 100%; height: 100%;
         transform-origin: top;
-        transform: translateZ(17.8px); 
+        transform: translateZ(13px); 
         transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 4;
+        z-index: 10;
         transform-style: preserve-3d;
     }
 
@@ -152,20 +147,30 @@
         width: 100%; height: 100%;
         background: linear-gradient(to bottom, #3a7d69, #1b4d3e);
         clip-path: polygon(0 0, 100% 0, 50% 54%);
+        transform-style: preserve-3d;
+    }
+
+    .top-flap::after {
+        content: '';
+        position: absolute;
+        width: 100%; height: 100%;
+        background: #0d2b22;
+        clip-path: polygon(0 0, 100% 0, 50% 54%);
+        transform: rotateY(180deg);
         backface-visibility: hidden;
     }
 
-    .open .flap-wrapper { transform: translateZ(17.8px) rotateX(180deg); }
+    /* PHYSICAL FIX: When flap opens, it folds backwards structurally to rest flush against the back panel */
+    .open .flap-wrapper { transform: translateZ(-2px) rotateX(180deg); }
 
     .wax-seal {
         position: absolute;
         left: 50%;
         top: 54%;
-        transform: translate(-50%, -50%) translateZ(2px);
+        transform: translate(-50%, -50%) translateZ(1px);
         width: clamp(65px, 16vw, 95px);
         height: clamp(65px, 16vw, 95px);
-        z-index: 5;
-        backface-visibility: hidden; 
+        z-index: 15;
         border-radius: 50%; 
         overflow: hidden;
         box-shadow: 0 6px 12px rgba(0,0,0,0.6);
@@ -187,9 +192,8 @@
         left: 6%;
         top: 2%;
         transform-style: preserve-3d;
-        transform: translate3d(0, 0, 0);
-        will-change: transform;
-        z-index: 2;
+        transform: translate3d(0, 0, 2px); /* Firmly between the back (-5px) and front flaps (10px) */
+        z-index: 2; 
     }
 
     .panel {
@@ -251,9 +255,10 @@
         mix-blend-mode: multiply; 
     }
     
-    .s1 { top: -15%; left: -15%; width: 60%; height: 60%; background: radial-gradient(circle, #e3a3a3, #d17a7a); }
-    .s2 { bottom: -15%; right: -15%; width: 55%; height: 55%; background: radial-gradient(circle, #ebbebe, #d69898); }
-    .s3 { top: 10%; right: -10%; width: 45%; height: 45%; background: radial-gradient(circle, #df9898, #c97575); opacity: 0.35; }
+    .s1 { top: -15%; left: -15%; width: 60%; height: 60%; background: radial-gradient(circle, #f0e6cd, #d4bd8a); }
+    .s2 { bottom: -15%; right: -15%; width: 55%; height: 55%; background: radial-gradient(circle, #d2e0d2, #a3c2a3); }
+    .s3 { top: 10%; right: -10%; width: 45%; height: 45%; background: radial-gradient(circle, #e8dfc5, #c2aa78); opacity: 0.35; }
+
 
     .face.back {
         background: linear-gradient(135deg, #e8d5c4, #dcbba0);
@@ -288,7 +293,6 @@
 </head>
 <body>
 
-<!-- Separate Layers for Background Performance -->
 <div class="bg-animation-layer"></div>
 <div class="sparkles-container"></div>
 
@@ -392,10 +396,14 @@ function openEnv() {
 function startBezierMotion() {
     const scene = document.getElementById("scene");
     const card = document.getElementById("card");
+    const flapWrapper = document.getElementById("flapWrapper");
     
     card.style.transition = "none";
     scene.classList.add("pulling");
-    card.style.zIndex = "10"; 
+    
+    // EXPLICIT Z-INDEX FIX: Drop the top flap's z-index below the card's immediately
+    flapWrapper.style.zIndex = "1";
+    card.style.zIndex = "2"; 
 
     const sceneH = scene.offsetHeight;
     let t = 0;
@@ -422,12 +430,20 @@ function startBezierMotion() {
         let ease = 1 - Math.pow(1 - progress, 3);
         
         let y = bezier(ease, y0, y1, y2, y3);
-        let z = 0;
+        let z = 2; // Default resting depth safely inside the pocket
         let rotateX = 0;
-        if (ease > 0.15) {
-            let zProg = (ease - 0.15) / 0.85;
-            z = bezier(zProg, 0, zPeak, zPeak * 0.9, zSettle);
+        
+        // ULTIMATE COLLISION FIX: Decouple Z-jump entirely from Y-motion until absolutely clear.
+        if (ease > 0.40) {
+            // At ease = 0.40, the card's bottom edge is mathematically guaranteed 
+            // to be strictly higher than the front geometry of the envelope.
+            let zProg = (ease - 0.40) / 0.60;
+            // Now safe to traverse Z space
+            z = bezier(zProg, 2, zPeak, zPeak * 0.9, zSettle);
             rotateX = zProg * 2.5; 
+            
+            // Pop the card to the absolute foreground
+            card.style.zIndex = "100";
         }
         
         let rotateZ = Math.sin(ease * Math.PI) * 2;
